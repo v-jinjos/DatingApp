@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreAppSample.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoreAppSample.Controllers
 {
+    [Authorize]
     [Route("/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -18,7 +20,7 @@ namespace CoreAppSample.Controllers
             this._context = context;
 
         }
-        // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult>  Get()
         {
@@ -26,6 +28,7 @@ namespace CoreAppSample.Controllers
            return Ok(values);
         }
 
+[AllowAnonymous]
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
